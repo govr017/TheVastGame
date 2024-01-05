@@ -19,6 +19,8 @@ var walk_vel: Vector3 # Walking velocity
 var grav_vel: Vector3 # Gravity velocity 
 var jump_vel: Vector3 # Jumping velocity
 
+var mode = false
+
 @onready var camera: Camera3D = $Head/Camera
 
 func _ready() -> void:
@@ -28,10 +30,35 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		look_dir = event.relative * 0.001
 		if mouse_captured: _rotate_camera()
-	if Input.is_action_just_pressed("jump"): jumping = true
+	if Input.is_action_just_pressed("jump"):
+		var rng = RandomNumberGenerator.new()
+		var rng_num = rng.randi_range(0, 1)
+		var pitch
+		if mode == true:
+			pitch = 0.5
+		elif mode == false:
+			pitch = 1
+		if rng_num == 0 and is_on_floor():
+			$Head/Camera/Sprite3D/Jump1.pitch_scale = pitch
+			$Head/Camera/Sprite3D/Jump1.play()
+		elif rng_num == 1 and is_on_floor():
+			$Head/Camera/Sprite3D/Jump2.pitch_scale = pitch
+			$Head/Camera/Sprite3D/Jump2.play()
+		jumping = true
+	if Input.is_action_just_pressed("mode_1"):
+		$Head/Camera/Sprite3D/Equip.play()
+		mode = !mode
 	if Input.is_action_just_pressed("exit"): get_tree().quit()
 
 func _physics_process(delta: float) -> void:
+	if mode == false:
+		$Head/Camera/Sprite3D.visible = false
+		speed = 10
+		jump_height = 1
+	elif mode == true:
+		$Head/Camera/Sprite3D.visible = true
+		speed = 5
+		jump_height = 4
 	if mouse_captured: _handle_joypad_camera_rotation(delta)
 	velocity = _walk(delta) + _gravity(delta) + _jump(delta)
 	move_and_slide()

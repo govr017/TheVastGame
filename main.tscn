@@ -1,6 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccr4h7eki6i43"]
+[gd_scene load_steps=18 format=3 uid="uid://ccr4h7eki6i43"]
 
 [ext_resource type="PackedScene" uid="uid://bxgacadsya1fm" path="res://FPS.tscn" id="1_gk5mn"]
+[ext_resource type="Texture2D" uid="uid://dspfxg8e00k34" path="res://sprites/tile1.png" id="2_45n1t"]
+[ext_resource type="AudioStream" uid="uid://ca15oosg4itvr" path="res://sound/somuchtodo.wav" id="3_lmshs"]
+[ext_resource type="Script" path="res://RigidBody3D.gd" id="4_wicos"]
+[ext_resource type="Texture2D" uid="uid://ck1ix6t6wfgdt" path="res://sprites/ball.png" id="5_1ax7q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sojrq"]
 sky_top_color = Color(0.133333, 0.427451, 0.721569, 1)
@@ -20,7 +24,28 @@ glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c5dpb"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ct8l8"]
+albedo_texture = ExtResource("2_45n1t")
+uv1_scale = Vector3(8, 8, 8)
+
 [sub_resource type="BoxMesh" id="BoxMesh_gh1ud"]
+material = SubResource("StandardMaterial3D_ct8l8")
+
+[sub_resource type="SphereMesh" id="SphereMesh_1eru4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q4a5o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kimf"]
+albedo_texture = ExtResource("5_1ax7q")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="SphereMesh" id="SphereMesh_luylf"]
+material = SubResource("StandardMaterial3D_2kimf")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5ptej"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_203d0"]
+radius = 0.160973
 
 [node name="Main" type="Node3D"]
 
@@ -32,15 +57,55 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i14lw")
 
-[node name="FPS" parent="." instance=ExtResource("1_gk5mn")]
+[node name="Player" parent="." instance=ExtResource("1_gk5mn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.06836, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Level" type="Node3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Level"]
+transform = Transform3D(3, 0, 0, 0, 20, 0, 0, 0, 3, 0, -6.90338, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D"]
 transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
 shape = SubResource("BoxShape3D_c5dpb")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D"]
 transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
 mesh = SubResource("BoxMesh_gh1ud")
+
+[node name="Egg" type="StaticBody3D" parent="Level"]
+transform = Transform3D(6.63362, 0, 0, 0, 10.6158, 0, 0, 0, 7.37716, 18.3477, 6.95617, 15.9795)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Egg"]
+mesh = SubResource("SphereMesh_1eru4")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Level/Egg"]
+stream = ExtResource("3_lmshs")
+volume_db = 3.107
+unit_size = 2.39
+autoplay = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Egg"]
+shape = SubResource("BoxShape3D_q4a5o")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0614672, 3.92844, -5.69478)
+mass = 0.39
+script = ExtResource("4_wicos")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/RigidBody3D"]
+mesh = SubResource("SphereMesh_luylf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/RigidBody3D"]
+shape = SubResource("SphereShape3D_5ptej")
+
+[node name="Area3D" type="Area3D" parent="Level/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0614672, -0.0453887, 0.101882)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/RigidBody3D/Area3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, -0.0875378)
+shape = SubResource("SphereShape3D_203d0")
+
+[connection signal="body_entered" from="Level/RigidBody3D/Area3D" to="Level/RigidBody3D" method="_on_area_3d_body_entered"]

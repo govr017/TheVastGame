@@ -1,6 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxgacadsya1fm"]
+[gd_scene load_steps=9 format=3 uid="uid://bxgacadsya1fm"]
 
 [ext_resource type="Script" path="res://FPS.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://6k86o0pd22d4" path="res://sprites/lead_baloon.png" id="2_h6jle"]
+[ext_resource type="AudioStream" uid="uid://dkscjwigmh88p" path="res://sound/equip.mp3" id="3_gxwbu"]
+[ext_resource type="AudioStream" uid="uid://0yrfglf0ha8d" path="res://sound/jump1.mp3" id="4_c1rdw"]
+[ext_resource type="AudioStream" uid="uid://o6c2jobxnf4t" path="res://sound/jump2.mp3" id="5_di565"]
+[ext_resource type="FontFile" uid="uid://b6hjdqhb1h3y8" path="res://alienreal.tres" id="6_8x66v"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 
@@ -24,3 +29,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera" type="Camera3D" parent="Head"]
 fov = 90.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Head/Camera"]
+transform = Transform3D(0.562964, 0.132343, -0.411759, 0, 0.467901, 0.436282, 0.339722, -0.21931, 0.682338, 0.952645, -0.566819, -1.21541)
+texture = ExtResource("2_h6jle")
+
+[node name="Equip" type="AudioStreamPlayer" parent="Head/Camera/Sprite3D"]
+stream = ExtResource("3_gxwbu")
+
+[node name="Jump1" type="AudioStreamPlayer" parent="Head/Camera/Sprite3D"]
+stream = ExtResource("4_c1rdw")
+volume_db = -3.748
+
+[node name="Jump2" type="AudioStreamPlayer" parent="Head/Camera/Sprite3D"]
+stream = ExtResource("5_di565")
+volume_db = -3.151
+
+[node name="Label3D" type="Label3D" parent="Head/Camera/Sprite3D/Jump2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.02087)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(1, 1, 1, 1)
+text = "SADA"
+font = ExtResource("6_8x66v")
+outline_size = 1
