@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://t0yctm6cijgt"]
+
+[ext_resource type="Texture2D" uid="uid://bbrolv4mwfpmn" path="res://sprites/jam.png" id="1_l40fc"]
+[ext_resource type="Texture2D" uid="uid://b41mj63twfd1j" path="res://sprites/lid.png" id="2_c148g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrlqk"]
+albedo_texture = ExtResource("1_l40fc")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y754u"]
+material = SubResource("StandardMaterial3D_xrlqk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdg5j"]
+albedo_texture = ExtResource("2_c148g")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ofxmf"]
+material = SubResource("StandardMaterial3D_qdg5j")
+
+[node name="JamModel" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.488236, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_y754u")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.14382, 0, 0, 0, 0.0976649, 0, 0, 0, 1.15396, 0, 0.466348, 0)
+mesh = SubResource("CylinderMesh_ofxmf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(0.900679, 0, 0, 0, 0.275273, 0, 0, 0, 0.932887, 0, -10.0096, 0)
+mesh = SubResource("CylinderMesh_ofxmf")

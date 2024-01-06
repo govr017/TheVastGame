@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpcu7ch4unf3j"]
+
+[ext_resource type="Texture2D" uid="uid://2wraqkilc180" path="res://sprites/metal1.png" id="1_rh7lq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hlor2"]
+albedo_texture = ExtResource("1_rh7lq")
+
+[sub_resource type="BoxMesh" id="BoxMesh_fqx5o"]
+material = SubResource("StandardMaterial3D_hlor2")
+
+[node name="Forklift" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.55617, 0, 0, 0, 1, 0, 0, 0, 4.2173, 0, 0, 0)
+mesh = SubResource("BoxMesh_fqx5o")

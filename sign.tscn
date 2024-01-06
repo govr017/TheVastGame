@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://sn7r365j3hke"]
+
+[ext_resource type="Texture2D" uid="uid://dm3bx765kgqc2" path="res://sprites/wood.png" id="1_a7cfd"]
+[ext_resource type="Script" path="res://sign.gd" id="1_di4hd"]
+[ext_resource type="FontFile" uid="uid://b6hjdqhb1h3y8" path="res://alienreal.tres" id="2_0rxq8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n6cng"]
+albedo_texture = ExtResource("1_a7cfd")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wdcv3"]
+material = SubResource("StandardMaterial3D_n6cng")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2esu"]
+albedo_texture = ExtResource("1_a7cfd")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ouuhq"]
+material = SubResource("StandardMaterial3D_y2esu")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t546i"]
+size = Vector3(1.92432, 1.97119, 0.267242)
+
+[node name="Sign" type="StaticBody3D"]
+script = ExtResource("1_di4hd")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.22064, 0, 0, 0, 1, 0, 0, 0, 0.231014, 0, 0, 0)
+mesh = SubResource("CylinderMesh_wdcv3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.86155, 0, 0, 0, 1, 0, 0, 0, 0.244529, 0, 0.447369, 0)
+mesh = SubResource("BoxMesh_ouuhq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0368652, 0.0144043, 0.00959778)
+shape = SubResource("BoxShape3D_t546i")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.120001, 0.440517, 0.124926)
+font = ExtResource("2_0rxq8")
+uppercase = true

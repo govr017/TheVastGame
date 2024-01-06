@@ -20,6 +20,7 @@ var grav_vel: Vector3 # Gravity velocity
 var jump_vel: Vector3 # Jumping velocity
 
 var mode = false
+var jams = 0
 
 @onready var camera: Camera3D = $Head/Camera
 
@@ -51,6 +52,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("exit"): get_tree().quit()
 
 func _physics_process(delta: float) -> void:
+	$Head/Camera/JamCount.text = str(jams) + "  JAM"
 	if mode == false:
 		$Head/Camera/Sprite3D.visible = false
 		speed = 10

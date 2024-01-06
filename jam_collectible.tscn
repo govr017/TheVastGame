@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bthc6fcojkkbw"]
+
+[ext_resource type="Script" path="res://JamCollectible.gd" id="1_ekl2p"]
+[ext_resource type="PackedScene" uid="uid://t0yctm6cijgt" path="res://jam_model.tscn" id="2_santc"]
+[ext_resource type="AudioStream" uid="uid://i7dsmum45tgy" path="res://sound/bite.mp3" id="3_trf0j"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g7hmm"]
+radius = 1.61436
+
+[node name="JamCollectible" type="Node3D"]
+script = ExtResource("1_ekl2p")
+
+[node name="JamModel" parent="." instance=ExtResource("2_santc")]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_g7hmm")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_trf0j")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

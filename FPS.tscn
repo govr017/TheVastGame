@@ -45,10 +45,10 @@ volume_db = -3.748
 stream = ExtResource("5_di565")
 volume_db = -3.151
 
-[node name="Label3D" type="Label3D" parent="Head/Camera/Sprite3D/Jump2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.02087)
+[node name="JamCount" type="Label3D" parent="Head/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.766055, 0.528865, -0.732868)
 modulate = Color(0, 0, 0, 1)
 outline_modulate = Color(1, 1, 1, 1)
-text = "SADA"
+text = "0  JAM"
 font = ExtResource("6_8x66v")
-outline_size = 1
+outline_size = 2
