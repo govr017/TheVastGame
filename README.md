@@ -5,4 +5,5 @@
 
 # CREDITS
 ## FPS CONTROLLER BY [rbarongr](https://github.com/rbarongr/). Thank you! ❤️ https://github.com/rbarongr/GodotFirstPersonController?tab=readme-ov-file
+## SOUNDS FROM [ZAPSPLAT](https://www.zapsplat.com/)
 
