@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://c6c1w5fhtf1l"]
+
+[ext_resource type="Texture2D" uid="uid://c81x1isfughj" path="res://sprites/glass.png" id="1_l4dyp"]
+[ext_resource type="Script" path="res://remote_protector.gd" id="1_rbqja"]
+[ext_resource type="AudioStream" uid="uid://i7dsmum45tgy" path="res://sound/bite.mp3" id="3_rall5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rcmfe"]
+transparency = 1
+albedo_texture = ExtResource("1_l4dyp")
+
+[sub_resource type="BoxMesh" id="BoxMesh_w0iqu"]
+material = SubResource("StandardMaterial3D_rcmfe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nqprh"]
+albedo_color = Color(1, 0.0313726, 0.0666667, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_vcmtv"]
+material = SubResource("StandardMaterial3D_nqprh")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dj8su"]
+size = Vector3(1.3186, 1.27271, 1.32837)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rpmgh"]
+size = Vector3(0.547729, 0.762207, 0.518799)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rjd3o"]
+size = Vector3(3.64233, 2.14526, 3.40643)
+
+[node name="RemoteProtector" type="StaticBody3D"]
+script = ExtResource("1_rbqja")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.20931, 0, 0, 0, 1.18081, 0, 0, 0, 1.21901, 0, 0, 0)
+mesh = SubResource("BoxMesh_w0iqu")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.538923, 0, 0, 0, 0.802353, 0, 0, 0, 0.622686, 0, 0, 0)
+mesh = SubResource("SphereMesh_vcmtv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03479, -0.0157471, 0.0228271)
+shape = SubResource("BoxShape3D_dj8su")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0067749, 0.0524902, -0.00476074)
+shape = SubResource("BoxShape3D_rpmgh")
+
+[node name="Area3D2" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1.02586, 0, 0, 0, 1.02586, 0, 0, 0, 1.02586, 0.0189209, 0.0811768, -0.0549834)
+shape = SubResource("BoxShape3D_rjd3o")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_rall5")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_2_body_entered"]

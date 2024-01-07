@@ -21,6 +21,7 @@ var jump_vel: Vector3 # Jumping velocity
 
 var mode = false
 var jams = 0
+var finale = false
 
 @onready var camera: Camera3D = $Head/Camera
 
@@ -52,6 +53,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("exit"): get_tree().quit()
 
 func _physics_process(delta: float) -> void:
+	if finale == true:
+		await get_tree().create_timer(5).timeout
+		$Head/Camera/AnimatedSprite3D/Boom.play()
+		$Head/Camera/AnimatedSprite3D.visible = true
+		$Head/Camera/AnimatedSprite3D.play("default")
+		await get_tree().create_timer(1).timeout
+		get_tree().quit()
 	$Head/Camera/JamCount.text = str(jams) + "  JAM"
 	if mode == false:
 		$Head/Camera/Sprite3D.visible = false
@@ -102,3 +110,10 @@ func _jump(delta: float) -> Vector3:
 		return jump_vel
 	jump_vel = Vector3.ZERO if is_on_floor() else jump_vel.move_toward(Vector3.ZERO, gravity * delta)
 	return jump_vel
+
+
+func _on_deatharea_3d_body_entered(body):
+	if body.name == "Player":
+		self.position = Vector3(0, 4, 0)
+	elif body.name == "Ball":
+		body.position= Vector3(0, 7, 0)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://djd0gbwvbn63c"]
+
+[ext_resource type="Script" path="res://Egg.gd" id="1_yys57"]
+[ext_resource type="AudioStream" uid="uid://i7dsmum45tgy" path="res://sound/bite.mp3" id="2_ojr52"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_2075v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hb0p2"]
+size = Vector3(2.27881, 1.99658, 2.21362)
+
+[node name="Egg" type="Area3D"]
+script = ExtResource("1_yys57")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.04113, 0, 0, 0, 1.44727, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_2075v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.145264, 0.282471, -0.0457764)
+shape = SubResource("BoxShape3D_hb0p2")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_ojr52")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

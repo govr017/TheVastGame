@@ -1,7 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://ccr4h7eki6i43"]
+[gd_scene load_steps=37 format=3 uid="uid://ccr4h7eki6i43"]
 
 [ext_resource type="PackedScene" uid="uid://bxgacadsya1fm" path="res://FPS.tscn" id="1_gk5mn"]
-[ext_resource type="Texture2D" uid="uid://dspfxg8e00k34" path="res://sprites/tile1.png" id="2_45n1t"]
+[ext_resource type="Texture2D" uid="uid://bhf2sqixstrjp" path="res://sprites/tile3.png" id="2_83jc3"]
 [ext_resource type="AudioStream" uid="uid://ca15oosg4itvr" path="res://sound/somuchtodo.wav" id="3_lmshs"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="4_wicos"]
 [ext_resource type="Texture2D" uid="uid://ck1ix6t6wfgdt" path="res://sprites/ball.png" id="5_1ax7q"]
@@ -11,6 +11,10 @@
 [ext_resource type="AudioStream" uid="uid://bmkt2f8nf0hcp" path="res://sound/yay.mp3" id="9_6kxgp"]
 [ext_resource type="PackedScene" uid="uid://bthc6fcojkkbw" path="res://jam_collectible.tscn" id="10_0fpdd"]
 [ext_resource type="PackedScene" uid="uid://sn7r365j3hke" path="res://sign.tscn" id="11_3311n"]
+[ext_resource type="PackedScene" uid="uid://cpcu7ch4unf3j" path="res://forklift.tscn" id="12_ohhes"]
+[ext_resource type="Texture2D" uid="uid://cw5ciucu8vr4c" path="res://sprites/carpet.png" id="13_4vugj"]
+[ext_resource type="PackedScene" uid="uid://djd0gbwvbn63c" path="res://egg.tscn" id="14_8kre8"]
+[ext_resource type="PackedScene" uid="uid://c6c1w5fhtf1l" path="res://remote_protector.tscn" id="15_a4ext"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sojrq"]
 sky_top_color = Color(0.133333, 0.427451, 0.721569, 1)
@@ -33,7 +37,7 @@ volumetric_fog_density = 0.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_c5dpb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ct8l8"]
-albedo_texture = ExtResource("2_45n1t")
+albedo_texture = ExtResource("2_83jc3")
 uv1_scale = Vector3(8, 8, 8)
 
 [sub_resource type="BoxMesh" id="BoxMesh_gh1ud"]
@@ -77,6 +81,16 @@ subdivide_depth = 10
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6tkd3"]
 size = Vector3(5.32837, 1.73145, 1.52295)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6yd3b"]
+size = Vector3(5738.29, 1, 7398.98)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5kxbx"]
+transparency = 1
+albedo_texture = ExtResource("13_4vugj")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jhwty"]
+material = SubResource("StandardMaterial3D_5kxbx")
 
 [node name="Main" type="Node3D"]
 
@@ -388,8 +402,119 @@ shape = SubResource("BoxShape3D_c5dpb")
 transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
 mesh = SubResource("BoxMesh_gh1ud")
 
+[node name="StaticBody3D18" type="StaticBody3D" parent="Level"]
+transform = Transform3D(0.0532203, 0, 0, 0, 20, 0, 0, 0, 0.0517858, 16.8788, -5.92595, 8.15285)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D18"]
+transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
+shape = SubResource("BoxShape3D_c5dpb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D18"]
+transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
+mesh = SubResource("BoxMesh_gh1ud")
+
+[node name="StaticBody3D14" type="StaticBody3D" parent="Level"]
+transform = Transform3D(0.603879, 0, 0, 0, 20, 0, 0, 0, 0.54977, -5.67391, -3.36067, -69.5257)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D14"]
+transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
+shape = SubResource("BoxShape3D_c5dpb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D14"]
+transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
+mesh = SubResource("BoxMesh_gh1ud")
+
+[node name="StaticBody3D15" type="StaticBody3D" parent="Level"]
+transform = Transform3D(0.603879, 0, 0, 0, 20, 0, 0, 0, 0.54977, -18.6751, 1.76151, -83.9438)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D15"]
+transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
+shape = SubResource("BoxShape3D_c5dpb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D15"]
+transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
+mesh = SubResource("BoxMesh_gh1ud")
+
+[node name="StaticBody3D16" type="StaticBody3D" parent="Level"]
+transform = Transform3D(0.603879, 0, 0, 0, 20, 0, 0, 0, 0.54977, -30.6525, 5.19994, -96.9589)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D16"]
+transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
+shape = SubResource("BoxShape3D_c5dpb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D16"]
+transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
+mesh = SubResource("BoxMesh_gh1ud")
+
+[node name="StaticBody3D17" type="StaticBody3D" parent="Level"]
+transform = Transform3D(0.603879, 0, 0, 0, 4.24888, 0, 0, 0, 4.15043, -45.5979, 20.1949, -68.9492)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D17"]
+transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, 0, 0, 0)
+shape = SubResource("BoxShape3D_c5dpb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D17"]
+transform = Transform3D(18.1884, 0, 0, 0, 1, 0, 0, 0, 17.462, -0.324997, 0.0638552, 0.00397301)
+mesh = SubResource("BoxMesh_gh1ud")
+
 [node name="JamCollectible3" parent="Level" instance=ExtResource("10_0fpdd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.646, 21.3622, -1.80546)
 
+[node name="Forklift" parent="Level" instance=ExtResource("12_ohhes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6682, 7.92106, 21.9166)
+
+[node name="Area3D" type="Area3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26.1948, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 294.831, 0, -0.561523)
+shape = SubResource("BoxShape3D_6yd3b")
+
+[node name="JamCollectible4" parent="Level" instance=ExtResource("10_0fpdd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73992, 10.0838, 63.5549)
+
+[node name="JamCollectible5" parent="Level" instance=ExtResource("10_0fpdd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.3067, 21.3638, -97.0999)
+
+[node name="Sign2" parent="Level" instance=ExtResource("11_3311n")]
+transform = Transform3D(-0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, -9.67821, 9.26482, 25.1415)
+text = "LIFT"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(3.77823, 0, 0, 0, 1, 0, 0, 0, 3.445, 19.6766, 3.16045, -14.6416)
+mesh = SubResource("PlaneMesh_jhwty")
+
+[node name="Egg2" parent="Level" instance=ExtResource("14_8kre8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5304, 3.78659, -13.0011)
+
+[node name="Egg3" parent="Level" instance=ExtResource("14_8kre8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5304, 3.78659, -15.3553)
+
+[node name="Egg4" parent="Level" instance=ExtResource("14_8kre8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4524, 3.78659, -13.9707)
+
+[node name="Egg5" parent="Level" instance=ExtResource("14_8kre8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.935, 3.78659, -16.4944)
+
+[node name="Egg6" parent="Level" instance=ExtResource("14_8kre8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.807, 3.78659, -15.4894)
+
+[node name="Egg7" parent="Level" instance=ExtResource("14_8kre8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1046, 3.78659, -12.6231)
+
+[node name="RemoteProtector" parent="Level" instance=ExtResource("15_a4ext")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9173, 4.5335, 8.1669)
+
+[node name="Sign3" parent="Level" instance=ExtResource("11_3311n")]
+transform = Transform3D(0.114088, 0, -0.993471, 0, 1, 0, 0.993471, 0, 0.114088, 15.5627, 3.73694, 6.11106)
+text = "5  JAM"
+
 [connection signal="body_entered" from="Level/Ball/Area3D" to="Level/Ball" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="Level/Gate/Area3D" to="Level/Gate/Area3D" method="_on_body_entered"]
+[connection signal="body_entered" from="Level/Area3D" to="Player" method="_on_deatharea_3d_body_entered"]
